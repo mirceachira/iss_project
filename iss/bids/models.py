@@ -15,7 +15,7 @@ class AuctionedItem(models.Model):
     )
     seller = models.ForeignKey(
         get_user_model(),
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=False,
         blank=False,
         help_text='cine pune la licitatie obiectul'
@@ -36,14 +36,14 @@ class AuctionedItem(models.Model):
 class Bid(models.Model):
     bidder = models.ForeignKey(
         get_user_model(),
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=False,
         blank=False,
         help_text='cine face o oferta'
     )
     item = models.ForeignKey(
         AuctionedItem,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=False,
         blank=False,
         help_text='licitatia'

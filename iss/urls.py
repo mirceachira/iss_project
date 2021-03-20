@@ -23,4 +23,6 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path("users/", include("iss.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
+    path("items/", include("iss.bids.urls", namespace="articles")),
+
 ]

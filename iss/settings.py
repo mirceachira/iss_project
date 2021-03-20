@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     "iss.users.apps.UsersConfig",
+    "iss.bids.apps.BidsConfig"
     # Your stuff: custom apps go here
 ]
 

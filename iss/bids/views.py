@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView
 
 from iss.bids.models import Bid, AuctionedItem
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 
 class ItemDetailView(DetailView):
     model = AuctionedItem
+    context_object_name = 'item'
     template_name = "items/item_detail.html"
     slug_field = "item"
     slug_url_kwarg = "item_id"
@@ -17,6 +20,7 @@ item_detail_view = ItemDetailView.as_view()
 class ItemListView(ListView):
     model = AuctionedItem
     paginate_by = 10
+    context_object_name = 'item_list'
     template_name = "items/item_list.html"
 
     # # def get_queryset(self):
@@ -65,6 +69,8 @@ class ItemCreateView(CreateView):
         "start_date",
         "end_date"
     ]
+    template_name = "items/item_form.html"
+
     def form_valid(self, form):
         form.instance.seller = self.request.user
         return super().form_valid(form)
@@ -82,6 +88,7 @@ class ItemUpdateView(UpdateView):
         "start_date",
         "end_date"
     ]
+    template_name = "items/item_form.html"
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -91,9 +98,10 @@ class ItemUpdateView(UpdateView):
 item_update_view = ItemUpdateView.as_view()
 
 
-class ItemDeleteView(ArticleUserPassesTestMixin, DeleteView):
+class ItemDeleteView(DeleteView):
     model = AuctionedItem
-    success_url = reverse_lazy("items:list")
+    template_name = "items/item_form.html"
+    success_url = reverse_lazy("home")
 
 
 item_delete_view = ItemDeleteView.as_view()

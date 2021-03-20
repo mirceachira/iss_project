@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Licitatie{% endblock %}
+
+{% block content %}
+
+<h1>Item list page</h1>
+{% for item in item_list %}
+<li >
+        <h5 ><a href="#">{{ item.name }}</a></h5>
+        <div >{{item.amount}}</div>
+        <div >{{item.id}}</div>
+
+{% endfor %}
+
+{% endblock content %}
