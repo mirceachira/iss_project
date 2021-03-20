@@ -108,16 +108,18 @@ item_delete_view = ItemDeleteView.as_view()
 
 
 
-# class BidDetailView(DetailView):
-#     model = Bid
-#     template_name = "bids/bid_detail.html"
-#     slug_field = "bid"
-#     slug_url_kwarg = "bid_id"
+class BidDetailView(DetailView):
+    model = Bid
+    template_name = "bids/bid_detail.html"
+    slug_field = "bid"
+    slug_url_kwarg = "bid_id"
 
 
-# bid_detail_view = BidDetailView.as_view()
+bid_detail_view = BidDetailView.as_view()
 
 
+
+# TODO: All that's below can be removed or used as inspiration
 # class BidListView(ListView):
 #     model = Bid
 #     paginate_by = 10
@@ -160,18 +162,15 @@ item_delete_view = ItemDeleteView.as_view()
 # bid_list_view = BidListView.as_view()
 
 
-# class BidCreateView(ArticleUserPassesTestMixin, CreateView):
+# class BidCreateView(CreateView):
 #     model = Bid
 #     fields = [
-#         # "title",
-#         # "content",
-#         # "short_description",
-#         # "publish_date",
-#         # "expiration_date",
+#         "amount",
 #     ]
 
 #     def form_valid(self, form):
-#         # form.instance.author = self.request.user
+#         form.instance.bidder = self.request.user
+#         # TODO: Add the item here by default too
 #         # form.instance.is_approved = False
 
 #         return super().form_valid(form)

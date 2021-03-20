@@ -11,7 +11,8 @@ urlpatterns = [
     path("update/<str:pk>/", views.item_update_view, name="item_update"),
     path("delete/<str:pk>/", views.item_delete_view, name="item_delete"),
 
+    # TODO: add a way to create and view bids in a list way (no need to create detail view)
     # path("bid_list", views.bid_list_view, name="bid_list"),
-    # path("bid_detail/<str:pk>/", views.bid_detail_view, name="bid_detail"),
+    # path("bid/detail/<str:pk>/", views.bid_detail_view, name="bid_detail"),
     # path("bid_add/", views.bid_create_view, name="bid_add"),
 ]
