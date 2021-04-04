@@ -40,16 +40,22 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    
+    
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "allauth",
     "allauth.account",
     # "allauth.socialaccount",
+    "channels",
+    
+    
 ]
 LOCAL_APPS = [
     "iss.users.apps.UsersConfig",
-    "iss.bids.apps.BidsConfig"
+    "iss.bids.apps.BidsConfig",
+    "chat"
     # Your stuff: custom apps go here
 ]
 
@@ -85,6 +91,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'iss.wsgi.application'
+# Channels
+ASGI_APPLICATION = 'iss.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Database
