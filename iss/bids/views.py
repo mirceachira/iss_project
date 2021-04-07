@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 class ItemDetailView(DetailView):
     model = AuctionedItem
-    context_object_name = 'item'
+    context_object_name = "item"
     template_name = "items/item_detail.html"
     slug_field = "item"
     slug_url_kwarg = "item_id"
@@ -20,7 +20,7 @@ item_detail_view = ItemDetailView.as_view()
 class ItemListView(ListView):
     model = AuctionedItem
     paginate_by = 10
-    context_object_name = 'item_list'
+    context_object_name = "item_list"
     template_name = "items/item_list.html"
 
     # # def get_queryset(self):
@@ -62,13 +62,7 @@ item_list_view = ItemListView.as_view()
 
 class ItemCreateView(CreateView):
     model = AuctionedItem
-    fields = [
-        "name",
-        "description",
-        "amount",
-        "start_date",
-        "end_date"
-    ]
+    fields = ["name", "description", "amount", "start_date", "end_date"]
     template_name = "items/item_form.html"
 
     def form_valid(self, form):
@@ -81,13 +75,7 @@ item_create_view = ItemCreateView.as_view()
 
 class ItemUpdateView(UpdateView):
     model = AuctionedItem
-    fields = [
-        "name",
-        "description",
-        "amount",
-        "start_date",
-        "end_date"
-    ]
+    fields = ["name", "description", "amount", "start_date", "end_date"]
     template_name = "items/item_form.html"
 
     def form_valid(self, form):
@@ -107,7 +95,6 @@ class ItemDeleteView(DeleteView):
 item_delete_view = ItemDeleteView.as_view()
 
 
-
 class BidDetailView(DetailView):
     model = Bid
     template_name = "bids/bid_detail.html"
@@ -116,7 +103,6 @@ class BidDetailView(DetailView):
 
 
 bid_detail_view = BidDetailView.as_view()
-
 
 
 # TODO: All that's below can be removed or used as inspiration

@@ -15,24 +15,79 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AuctionedItem',
+            name="AuctionedItem",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField(help_text='numele obiectului')),
-                ('description', models.TextField(help_text='descrierea obiectului')),
-                ('amount', models.DecimalField(decimal_places=2, help_text='pretul curent al licitatiei', max_digits=6)),
-                ('start_date', models.DateTimeField(help_text='data cand incepe licitatia')),
-                ('end_date', models.DateTimeField(help_text='data cand se termina licitatia')),
-                ('seller', models.ForeignKey(help_text='cine pune la licitatie obiectul', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.TextField(help_text="numele obiectului")),
+                ("description", models.TextField(help_text="descrierea obiectului")),
+                (
+                    "amount",
+                    models.DecimalField(
+                        decimal_places=2,
+                        help_text="pretul curent al licitatiei",
+                        max_digits=6,
+                    ),
+                ),
+                (
+                    "start_date",
+                    models.DateTimeField(help_text="data cand incepe licitatia"),
+                ),
+                (
+                    "end_date",
+                    models.DateTimeField(help_text="data cand se termina licitatia"),
+                ),
+                (
+                    "seller",
+                    models.ForeignKey(
+                        help_text="cine pune la licitatie obiectul",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Bid',
+            name="Bid",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, help_text='cat ofera', max_digits=6)),
-                ('bidder', models.ForeignKey(help_text='cine face o oferta', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('item', models.ForeignKey(help_text='licitatia', on_delete=django.db.models.deletion.CASCADE, to='bids.auctioneditem')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.DecimalField(
+                        decimal_places=2, help_text="cat ofera", max_digits=6
+                    ),
+                ),
+                (
+                    "bidder",
+                    models.ForeignKey(
+                        help_text="cine face o oferta",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "item",
+                    models.ForeignKey(
+                        help_text="licitatia",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="bids.auctioneditem",
+                    ),
+                ),
             ],
         ),
     ]
