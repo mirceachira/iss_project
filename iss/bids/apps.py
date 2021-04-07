@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class BidsConfig(AppConfig):
-    name = 'iss.bids'
+    name = "iss.bids"
     verbose_name = _("Bids")
 
     def ready(self):
