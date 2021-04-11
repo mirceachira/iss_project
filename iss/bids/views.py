@@ -72,13 +72,14 @@ class BidDetailView(DetailView):
 
 bid_detail_view = BidDetailView.as_view()
 
+
 class BidListView(ListView):
     paginate_by = 10
     context_object_name = "bid_list"
     template_name = "bids/bid_list.html"
 
     def get_queryset(self):
-        return Bid.objects.filter(item__pk=self.kwargs['pk'])
+        return Bid.objects.filter(item__pk=self.kwargs["pk"])
 
 
 bid_list_view = BidListView.as_view()
