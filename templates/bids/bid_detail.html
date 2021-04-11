@@ -12,7 +12,7 @@
 <p >{{ bid.bidder.username }}</p>
 <p >{{ bid.item.name }}</p>
 
-can access Item
-can access Bidder
+<a href="{% url 'items:bid_update' bid.id  %}">edit</a>
+<a href="{% url 'items:bid_delete' bid.id  %}">delete</a>
 
 {% endblock content %}

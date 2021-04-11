@@ -10,4 +10,6 @@
 <h5 >{{ item.name }}</h5>
 <p >{{ item.description }}</p>
 
+<a href="{% url 'items:bid_list' item.id  %}">bid list</a>
+
 {% endblock content %}

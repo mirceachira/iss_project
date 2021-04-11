@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Licitatie{% endblock %}
+
+{% block content %}
+
+<h1>Bid list page</h1>
+<p >{{ bid.item.name }}</p>
+<p >{{ bid.item.id }}</p>
+
+{% for bid in bid_list %}
+<li >
+        <h5 >{{ bid.amount }}</h5>
+        <a href="{% url 'items:bid_detail' bid.id  %}">link</a>
+        <p >{{ bid.bidder.name }}</p>
+        <p >{{ bid.bidder.username }}</p>
+        <p >{{ bid.item.name }}</p>
+</li>
+{% endfor %}
+
+{% endblock content %}

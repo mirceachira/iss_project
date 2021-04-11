@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView
 
 from iss.bids.models import Bid, AuctionedItem
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.shortcuts import get_object_or_404
 
 
 class ItemDetailView(DetailView):
@@ -22,39 +23,6 @@ class ItemListView(ListView):
     paginate_by = 10
     context_object_name = "item_list"
     template_name = "items/item_list.html"
-
-    # # def get_queryset(self):
-    # #     tag = self.request.GET.get("tag", None)
-    # #     if tag:
-    # #         base_queryset = A.objects.filter(
-    # #             Q(tags__name__in=[tag]),
-    # #             Q(is_approved=True),
-    # #             Q(publish_date__lte=datetime.now()),
-    # #             # Has no expiration date or has not expired yet
-    # #             Q(expiration_date__isnull=True)
-    # #             | Q(expiration_date__gte=datetime.now()),
-    # #         )
-    # #     else:
-    # #         base_queryset = Article.objects.filter(
-    # #             Q(is_approved=True),
-    # #             Q(publish_date__lte=datetime.now()),
-    # #             # Has no expiration date or has not expired yet
-    # #             Q(expiration_date__isnull=True)
-    # #             | Q(expiration_date__gte=datetime.now()),
-    # #         )
-
-    # #     sort = self.request.GET.get("sort", None)
-    # #     if sort == "title":
-    # #         base_queryset = base_queryset.order_by("title")
-    # #     elif sort == "publish_date":
-    # #         base_queryset = base_queryset.order_by("publish_date")
-    # #     elif sort == "expiration_date":
-    # #         base_queryset = base_queryset.order_by("expiration_date")
-    # #     return base_queryset
-
-    # def get_ordering(self):
-    #     ordering = self.request.GET.get("ordering", "-publish_date")
-    #     return ordering
 
 
 item_list_view = ItemListView.as_view()
@@ -104,62 +72,52 @@ class BidDetailView(DetailView):
 
 bid_detail_view = BidDetailView.as_view()
 
+class BidListView(ListView):
+    paginate_by = 10
+    context_object_name = "bid_list"
+    template_name = "bids/bid_list.html"
 
-# TODO: All that's below can be removed or used as inspiration
-# class BidListView(ListView):
-#     model = Bid
-#     paginate_by = 10
-#     template_name = "bids/bid_list.html"
-
-#     # # def get_queryset(self):
-#     # #     tag = self.request.GET.get("tag", None)
-#     # #     if tag:
-#     # #         base_queryset = A.objects.filter(
-#     # #             Q(tags__name__in=[tag]),
-#     # #             Q(is_approved=True),
-#     # #             Q(publish_date__lte=datetime.now()),
-#     # #             # Has no expiration date or has not expired yet
-#     # #             Q(expiration_date__isnull=True)
-#     # #             | Q(expiration_date__gte=datetime.now()),
-#     # #         )
-#     # #     else:
-#     # #         base_queryset = Article.objects.filter(
-#     # #             Q(is_approved=True),
-#     # #             Q(publish_date__lte=datetime.now()),
-#     # #             # Has no expiration date or has not expired yet
-#     # #             Q(expiration_date__isnull=True)
-#     # #             | Q(expiration_date__gte=datetime.now()),
-#     # #         )
-
-#     # #     sort = self.request.GET.get("sort", None)
-#     # #     if sort == "title":
-#     # #         base_queryset = base_queryset.order_by("title")
-#     # #     elif sort == "publish_date":
-#     # #         base_queryset = base_queryset.order_by("publish_date")
-#     # #     elif sort == "expiration_date":
-#     # #         base_queryset = base_queryset.order_by("expiration_date")
-#     # #     return base_queryset
-
-#     # def get_ordering(self):
-#     #     ordering = self.request.GET.get("ordering", "-publish_date")
-#     #     return ordering
+    def get_queryset(self):
+        return Bid.objects.filter(item__pk=self.kwargs['pk'])
 
 
-# bid_list_view = BidListView.as_view()
+bid_list_view = BidListView.as_view()
 
 
-# class BidCreateView(CreateView):
-#     model = Bid
-#     fields = [
-#         "amount",
-#     ]
+class BidCreateView(CreateView):
+    model = Bid
 
-#     def form_valid(self, form):
-#         form.instance.bidder = self.request.user
-#         # TODO: Add the item here by default too
-#         # form.instance.is_approved = False
+    # 'bidder' and 'item' should be filled automatically
+    fields = ["amount"]
+    template_name = "bids/bid_form.html"
 
-#         return super().form_valid(form)
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
 
 
-# bid_create_view = BidCreateView.as_view()
+bid_create_view = BidCreateView.as_view()
+
+
+class BidUpdateView(UpdateView):
+    model = Bid
+
+    # 'bidder' and 'item' should be filled automatically
+    fields = ["amount"]
+    template_name = "bids/bid_form.html"
+
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
+
+
+bid_update_view = BidUpdateView.as_view()
+
+
+class BidDeleteView(DeleteView):
+    model = Bid
+    template_name = "bids/bid_form.html"
+    success_url = reverse_lazy("home")
+
+
+bid_delete_view = BidDeleteView.as_view()
