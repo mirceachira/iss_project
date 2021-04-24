@@ -11,5 +11,12 @@
 <p >{{ item.description }}</p>
 
 <a href="{% url 'items:bid_list' item.id  %}">bid list</a>
+<a href="{% url 'chat:room' item.id  %}">chat</a>
+
+<a href="{% url 'items:item_delete' item.id  %}">delete</a>
+<a href="{% url 'items:item_update' item.id  %}">update</a>
+
+<a href="{% url 'items:bid_add' item.id  %}">bid</a>
+
 
 {% endblock content %}

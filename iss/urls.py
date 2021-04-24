@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-from chat.views import index
 
 
 urlpatterns = [
@@ -25,5 +24,5 @@ urlpatterns = [
     path("users/", include("iss.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     path("items/", include("iss.bids.urls", namespace="items")),
-    path("chat/", include("chat.urls", namespace="chat")),
+    path("chat/", include("iss.chat.urls", namespace="chat")),
 ]

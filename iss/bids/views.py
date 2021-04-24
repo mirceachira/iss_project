@@ -32,6 +32,7 @@ class ItemCreateView(CreateView):
     model = AuctionedItem
     fields = ["name", "description", "amount", "start_date", "end_date"]
     template_name = "items/item_form.html"
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -45,6 +46,7 @@ class ItemUpdateView(UpdateView):
     model = AuctionedItem
     fields = ["name", "description", "amount", "start_date", "end_date"]
     template_name = "items/item_form.html"
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -91,6 +93,7 @@ class BidCreateView(CreateView):
     # 'bidder' and 'item' should be filled automatically
     fields = ["amount"]
     template_name = "bids/bid_form.html"
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -106,9 +109,11 @@ class BidUpdateView(UpdateView):
     # 'bidder' and 'item' should be filled automatically
     fields = ["amount"]
     template_name = "bids/bid_form.html"
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
-        form.instance.seller = self.request.user
+        form.instance.bidder = self.request.user
+        form.instance.item = AuctionedItem.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
 
 

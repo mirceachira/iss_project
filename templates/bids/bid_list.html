@@ -6,8 +6,6 @@
 {% block content %}
 
 <h1>Bid list page</h1>
-<p >{{ bid.item.name }}</p>
-<p >{{ bid.item.id }}</p>
 
 {% for bid in bid_list %}
 <li >
@@ -16,6 +14,7 @@
         <p >{{ bid.bidder.name }}</p>
         <p >{{ bid.bidder.username }}</p>
         <p >{{ bid.item.name }}</p>
+        <a href="{% url 'items:item_detail' bid.item.id %}">item page</a>
 </li>
 {% endfor %}
 

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import index, room
+from iss.chat.views import index, room
 
 app_name = "chat"
 
