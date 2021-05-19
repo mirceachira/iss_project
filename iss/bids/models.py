@@ -27,7 +27,7 @@ class Bid(models.Model):
         on_delete=models.CASCADE,
         null=False,
         blank=False,
-        help_text="cine face o oferta",
+        help_text="Enter the amount you wish to bid",
     )
     item = models.ForeignKey(
         AuctionedItem,

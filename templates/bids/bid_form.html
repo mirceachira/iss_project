@@ -4,10 +4,18 @@
 {% block title %}Bid {% endblock %}
 
 {% block content %}
-
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+<!DOCTYPE html>
+<html>
+    <body>
+        
+        
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            
+            <input class="btn btn-success" type="submit" value="Save">
+            
+        </form>
+    </body>
+</html>
 
 {% endblock content %}

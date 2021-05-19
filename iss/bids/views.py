@@ -89,6 +89,7 @@ bid_list_view = BidListView.as_view()
 
 class BidCreateView(CreateView):
     model = Bid
+    
 
     # 'bidder' and 'item' should be filled automatically
     fields = ["amount"]
@@ -97,6 +98,8 @@ class BidCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
+        form.instance.bidder = self.request.user
+        form.instance.item = AuctionedItem.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
 
 

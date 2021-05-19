@@ -5,17 +5,57 @@
 
 {% block content %}
 
-<h1>Bid list page</h1>
+<h1>Currently placed bids  </h1>
 
-{% for bid in bid_list %}
-<li >
-        <h5 >{{ bid.amount }}</h5>
-        <a href="{% url 'items:bid_detail' bid.id  %}">link</a>
-        <p >{{ bid.bidder.name }}</p>
-        <p >{{ bid.bidder.username }}</p>
-        <p >{{ bid.item.name }}</p>
-        <a href="{% url 'items:item_detail' bid.item.id %}">item page</a>
-</li>
-{% endfor %}
+
+
+<div class="content">
+    
+        <div class="container">
+    
+          <div class="table-responsive">
+    
+            <table class="table table-striped custom-table">
+              <thead>
+                <tr>
+                  
+                  <th scope="col">Bidder name</th>
+                  <th scope="col">Item</th>
+                  <th scope="col">Bid Amount</th>
+                  <th scope="col">Bid Details</th>
+                  <th scope="col">Item Details</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bid in bid_list %}
+                
+                <tr scope="row">
+    
+                  
+                          
+                         
+                          <td>{{ bid.bidder.username }}</td>
+                          <td>
+                                {{ bid.item.name }}
+                          </td>
+                          <td>{{ bid.amount }}$</td>
+                          <td>
+                                <a href="{% url 'items:bid_detail' bid.id  %}">go to bid</a>
+                          </td>
+                          <td>
+                                <a href="{% url 'items:item_detail' bid.item.id %}">go to item</a>
+                          </td>
+                
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+    
+    
+        </div>
+    
+      </div>
 
 {% endblock content %}
