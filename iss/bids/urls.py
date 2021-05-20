@@ -6,7 +6,9 @@ app_name = "bids"
 
 urlpatterns = [
     path("list/", views.item_list_view, name="item_list"),
+    path("mylist/", views.myitem_list_view, name="item_mylist"),
     path("detail/<str:pk>/", views.item_detail_view, name="item_detail"),
+    path("myitemdetail/<str:pk>/", views.myitem_detail_view, name="my_item_detail"),
     path("add/", views.item_create_view, name="item_add"),
     path("update/<str:pk>/", views.item_update_view, name="item_update"),
     path("delete/<str:pk>/", views.item_delete_view, name="item_delete"),

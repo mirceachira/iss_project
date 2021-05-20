@@ -68,6 +68,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'items:item_list' %}">Items<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'items:item_mylist' %}">My Items<span class="sr-only">(current)</span></a>
+            </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}

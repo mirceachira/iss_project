@@ -5,6 +5,7 @@ from django.views.generic import DetailView, ListView
 from iss.bids.models import Bid, AuctionedItem
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 class ItemDetailView(DetailView):
@@ -18,14 +19,41 @@ class ItemDetailView(DetailView):
 item_detail_view = ItemDetailView.as_view()
 
 
+
+
+class MyItemDetailView(DetailView):
+    model = AuctionedItem
+    context_object_name = "item"
+    template_name = "items/item_myitems.html"
+    slug_field = "item"
+    slug_url_kwarg = "item_id"
+
+
+myitem_detail_view = MyItemDetailView.as_view()
+
 class ItemListView(ListView):
     model = AuctionedItem
     paginate_by = 10
     context_object_name = "item_list"
     template_name = "items/item_list.html"
 
+    def get_queryset(self):
+        return AuctionedItem.objects.filter(~Q(seller=self.request.user))
+
 
 item_list_view = ItemListView.as_view()
+
+
+class MyItemListView(ListView):
+    model = AuctionedItem
+    paginate_by = 10
+    context_object_name = "item_list"
+    template_name = "items/item_mylist.html"
+
+    def get_queryset(self):
+        return AuctionedItem.objects.filter(seller=self.request.user)
+
+myitem_list_view = MyItemListView.as_view()
 
 
 class ItemCreateView(CreateView):
@@ -89,7 +117,7 @@ bid_list_view = BidListView.as_view()
 
 class BidCreateView(CreateView):
     model = Bid
-    
+
 
     # 'bidder' and 'item' should be filled automatically
     fields = ["amount"]

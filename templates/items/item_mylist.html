@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Licitatie{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+        <body>
+
+                <div class="hero-text-bid">
+                        <h1 style="font-size:50px">Available items</h1>
+
+                      </div>
+
+
+
+
+<ul class="tilesWrap">
+{% for item in item_list %}
+<li >
+        <h2>{{item.amount}}$</h2>
+        <h3 >{{ item.name }}</h3>
+        <p>
+                <br><br>
+        {{item.description|truncatechars:80}}</p>
+        <button ><a href="{% url 'items:my_item_detail' item.id %}">Read more</a></button>
+</li>
+{% endfor %}
+</ul>
+
+<div class="footer">
+        <a class="neon-button" href="{% url 'items:item_add' %}"><p>add a new item for sale</p></a>
+</div>
+{% endblock content %}
+</body>
+</html>

@@ -24,7 +24,9 @@
     <a class="btn  custom-btn"href="{% url 'chat:room' item.id  %}">Chat with other bidders</a>
 <hr>
 
- <a class="btn custom-btn" href="{% url 'items:bid_add' item.id  %}" style="background-color: green;">Place a bid</a>
+    <a class="btn custom-btn" href="{% url 'items:item_update' item.id  %}">Update item</a>
+    <a class ="btn custom-btn"href="{% url 'items:item_delete' item.id  %}" style="background-color: red;">Close auction</a>
+    <a class ="btn custom-btn"href="{% url 'items:item_delete' item.id  %}" style="background-color: red;">Delete item</a>
   </div>
 </body>
 </html>
