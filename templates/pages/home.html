@@ -1,10 +1,30 @@
 {% extends "base.html" %}
-
-
+{% load static %}
 {% block content %}
+ <!DOCTYPE html>
+<html>
 
-<h3>Bidster</h3>
+    
+    
+<body>
 
-<p>Bid on items you like.</p>
-<p>Or sell your own items.</p>
+
+    <div class="hero-text">
+        <h1 style="font-size:50px">Search, Bid, Buy!</h1>
+        <br>
+        <p class='cursive'>We Fetch the Best Value for Your Valuables.</p>
+        
+        <a href="{% url 'items:item_list' %}" class="neon-button">Discover</a>
+      </div>
+
+
 {% endblock content %}
+
+</body>
+
+
+
+
+
+
+</html>

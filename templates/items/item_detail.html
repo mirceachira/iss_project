@@ -4,19 +4,28 @@
 {% block title %}Licitatie{% endblock %}
 
 {% block content %}
-
-<h1>Item detail page</h1>
-
-<h5 >{{ item.name }}</h5>
-<p >{{ item.description }}</p>
-
-<a href="{% url 'items:bid_list' item.id  %}">bid list</a>
-<a href="{% url 'chat:room' item.id  %}">chat</a>
-
-<a href="{% url 'items:item_delete' item.id  %}">delete</a>
-<a href="{% url 'items:item_update' item.id  %}">update</a>
-
-<a href="{% url 'items:bid_add' item.id  %}">bid</a>
+<!DOCTYPE html>
+<html>
+<body>
+<br><br><br>
 
 
+<div class="card">
+    <h1>{{item.name}}</h1>
+    <hr>
+    <h3>Price: {{item.amount}}$</h3>
+    <p class="description">Details: <br>{{item.description}}</p>
+
+
+    <div> <h3>Actions:</h3></div>
+    <hr>
+    <a class="btn custom-btn" href="{% url 'items:bid_list' item.id  %}" >See current bids for the item</a>
+    <hr>
+    <a class="btn  custom-btn"href="{% url 'chat:room' item.id  %}">Chat with other bidders</a>
+<hr>
+
+ <a class="btn custom-btn" href="{% url 'items:bid_add' item.id  %}" style="background-color: green;">Place a bid</a>
+  </div>
+</body>
+</html>
 {% endblock content %}
